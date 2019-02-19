@@ -1,0 +1,66 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Shagyt\lvcrud\Models\Module;
+use Shagyt\lvcrud\Models\FieldType;
+use Shagyt\lvcrud\Models\Field;
+
+class Create__Class__Table extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Module::generate('__Class__', '__Table__', '__represent_attr__', '__icon__', [
+            __single_field__
+        ]);
+        
+        /*
+        Module::generate('__Class__' '__Table__', '__represent_attr__', '__icon__', [
+            [
+                'name' => 'name',
+                'label' => 'Name',
+                'field_type' => 'Name',
+                'unique' => false,
+                'defaultvalue' => 'John Doe',
+                'minlength' => 5,
+                'maxlength' => 100,
+                'required' => true,
+                'nullable_required' => false,
+                'show_index' => true,
+                'json_values' => ['Employee', 'Client']
+            ]
+        ]);
+
+        field type [
+            __Field_type__
+        ]
+
+        name: Database column name. lowercase, words concatenated by underscore (_)
+        label: Label of Column e.g. Name, Cost, Is Public
+        field_type: It defines type of Column in more General way.
+        unique: Whether the column has unique values. Value in true / false
+        defaultvalue: Default value for column.
+        minlength: Minimum Length of value in integer.
+        maxlength: Maximum Length of value in integer.
+        required: Is this mandatory field in Add / Edit forms. Value in true / false
+        show_index: Is allowed to show in index page datatable.
+        json_values: These are values for MultiSelect, TagInput and Radio Columns. Either connecting @tables or to list []
+        */
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        if(Schema::hasTable('__Table__')) {
+            Schema::drop('__Table__');
+        }
+    }
+}

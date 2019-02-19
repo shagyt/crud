@@ -1,0 +1,76 @@
+@extends('layouts.app')
+
+@section('header')
+    <section class="content-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    <span class="fa {{ $crud->icon }}"></span>
+                    <span class="text-capitalize">{{ $crud->labelPlural }}</span>
+                    <small>{{ trans('crud.all') }} <span>{{ $crud->labelPlural }}</span> {{ trans('crud.in_the_database') }}.</small>
+                </h1>
+            </div>
+            <div class="col-md-6">
+                @include('crud.inc.button_stack', ['stack' => 'top'])
+            </div>
+        </div>
+    </section>
+@endsection
+
+@section('content')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                {{-- <div class="box-header {{ $crud->hasAccess('create')?'with-border':'hide' }}">
+                </div> --}}
+                <div class="box-body">
+                    <table id="crudTable" class="table table-bordered table-striped display crudTable">
+                        <thead class="table-success">
+                            <tr>
+                                <th>id</th>
+                                
+                                {{-- Table columns --}}
+                                @foreach ($crud->columns as $column)
+                                <th>{{ $column['label'] }}</th>
+                                @endforeach
+
+                                @if ( $crud->buttons->where('stack', 'line')->count() )
+                                <th style="width: 100px;">{{ trans('crud.actions') }}</th>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+                @include('crud.inc.button_stack', ['stack' => 'bottom'])
+            </div><!-- /.box -->
+        </div>
+    </div>
+@endsection
+
+@push('after_styles')
+    
+@endpush
+
+@push('after_scripts')
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            
+            $('#add_form').validate();
+
+            var table = $("#crudTable").DataTable({
+                "pageLength": {{ $crud->getDefaultPageLength() }},
+                /* Disable initial sort */
+                "aaSorting": [],
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "{!! url($crud->route.'/datatable') !!}",
+                    "type": "POST",
+                },
+                dom: "<'m10'<'row'<'col-sm-3'i><'col-sm-3'B><'col-sm-6'f>><'table-responsive'tr><'row'<'col-sm-3 mt20'l><'col-sm-9 pull-right'p>>>",
+            });
+        });
+    </script>
+@endpush

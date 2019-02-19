@@ -1,0 +1,73 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Actuallymab\LaravelComment\Commentable;
+
+class DummyClassSingular extends Model
+{
+    use SoftDeletes;
+    use Commentable;
+
+     /*
+    |--------------------------------------------------------------------------
+    | GLOBAL VARIABLES
+    |--------------------------------------------------------------------------
+    */
+
+    protected $table = 'DummyTable';
+	
+	protected $hidden = [
+        
+    ];
+
+	protected $guarded = [];
+
+	protected $dates = ['deleted_at'];
+    
+    protected $mustBeApproved = false;
+    protected $canBeRated = false;
+
+    /*
+    |--------------------------------------------------------------------------
+    | FUNCTIONS
+    |--------------------------------------------------------------------------
+    */
+    /**
+     * get module info of this DummyClass.
+     *
+     * @param module
+     *
+     * @return void
+     */
+    public Static function get_module()
+    {
+        return \Module::where('name', 'DummyClass')->first();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | SCOPES
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | ACCESORS
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | MUTATORS
+    |--------------------------------------------------------------------------
+    */
+}

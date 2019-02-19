@@ -1,0 +1,14 @@
+{
+    "name": "shagyt/lvcrud",
+    "description": "Make quick crud.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sagar Takle",
+            "email": "sagarkoshti1990@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
